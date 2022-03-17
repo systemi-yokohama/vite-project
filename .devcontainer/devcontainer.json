@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/typescript-node
+{
+	"name": "vite-project",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick a Node version: 18, 16, 14.
+		// Append -bullseye or -buster to pin to an OS version.
+		// Use -bullseye variants on local on arm64/Apple Silicon.
+		"args": {
+			"VARIANT": "16-bullseye"
+		}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"editor.defaultFormatter": "EditorConfig.EditorConfig",
+				"editor.formatOnSave": true,
+				"editor.renderControlCharacters": true,
+				"editor.renderWhitespace": "all",
+				"extensions.ignoreRecommendations": true,
+				"code-eol.crlfCharacter": "↵",
+				"code-eol.decorateBeforeEol": true,
+				"code-eol.highlightExtraWhitespace": true,
+				"code-eol.highlightNonDefault": true,
+				"code-eol.newlineCharacter": "↓",
+				"code-eol.returnCharacter": "←",
+				"editorconfig.generateAuto": true,
+				"editorconfig.template": "default"
+			},
+
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"EditorConfig.EditorConfig",
+				"medo64.render-crlf"
+			]
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": ".devcontainer/postcreate.sh",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node",
+	"features": {
+		"git": "latest",
+		"github-cli": "latest"
+	},
+
+	// Change the default source code mount
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
+
+	"mounts": [
+		// Avoiding extension reinstalls on container rebuild
+		"source=vite-project-extensions,target=/home/node/.vscode-server/extensions,type=volume"
+	]
+}
