@@ -32,6 +32,9 @@
 				"editorconfig.generateAuto": true,
 				"editorconfig.template": "default",
 				"typescript.tsdk": "node_modules/typescript/lib",
+				"[postcss]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
 				"[typescript]": {
 					"editor.defaultFormatter": "esbenp.prettier-vscode"
 				},
@@ -42,6 +45,8 @@
 
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
+				"bradlc.vscode-tailwindcss",
+				"csstools.postcss",
 				"EditorConfig.EditorConfig",
 				"esbenp.prettier-vscode",
 				"medo64.render-crlf"
