@@ -30,7 +30,8 @@
 				"code-eol.newlineCharacter": "↓",
 				"code-eol.returnCharacter": "←",
 				"editorconfig.generateAuto": true,
-				"editorconfig.template": "default"
+				"editorconfig.template": "default",
+				"typescript.tsdk": "node_modules/typescript/lib"
 			},
 
 			// Add the IDs of extensions you want installed when the container is created.
@@ -60,6 +61,9 @@
 
 	"mounts": [
 		// Avoiding extension reinstalls on container rebuild
-		"source=vite-project-extensions,target=/home/node/.vscode-server/extensions,type=volume"
+		"source=vite-project-extensions,target=/home/node/.vscode-server/extensions,type=volume",
+		// Use a targeted named volume
+		"source=vite-project-dist,target=${containerWorkspaceFolder}/dist,type=volume",
+		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
 	]
 }
