@@ -31,12 +31,19 @@
 				"code-eol.returnCharacter": "←",
 				"editorconfig.generateAuto": true,
 				"editorconfig.template": "default",
-				"typescript.tsdk": "node_modules/typescript/lib"
+				"typescript.tsdk": "node_modules/typescript/lib",
+				"[typescript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[typescriptreact]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				}
 			},
 
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"EditorConfig.EditorConfig",
+				"esbenp.prettier-vscode",
 				"medo64.render-crlf"
 			]
 		}
