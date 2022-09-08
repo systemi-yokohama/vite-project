@@ -7,7 +7,7 @@ git config --global --add safe.directory /workspace
 
 npx husky install
 
-sudo chown node:node dist node_modules
+sudo chown node:node dist node_modules storybook-static
 
 npm ci
 

@@ -12,7 +12,12 @@
 		}
 	},
 
-	// Configure tool-specific properties.
+  // set of name-value pairs that sets or overrides environment variables for the container.
+	"containerEnv": {
+		"STORYBOOK_TELEMETRY_DEBUG": "1"
+	},
+
+  // Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
@@ -76,6 +81,7 @@
 		"source=vite-project-extensions,target=/home/node/.vscode-server/extensions,type=volume",
 		// Use a targeted named volume
 		"source=vite-project-dist,target=${containerWorkspaceFolder}/dist,type=volume",
-		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=vite-project-storybook-static,target=${containerWorkspaceFolder}/storybook-static,type=volume"
 	]
 }
