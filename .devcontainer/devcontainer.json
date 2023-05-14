@@ -11,6 +11,7 @@
 
 	// Use a targeted named volume
 	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind",
 		"source=vite-project-dist,target=${containerWorkspaceFolder}/dist,type=volume",
 		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
 		"source=vite-project-storybook-static,target=${containerWorkspaceFolder}/storybook-static,type=volume"
@@ -18,6 +19,7 @@
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
+		"ghcr.io/devcontainers/features/aws-cli:1": {},
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/node:1": {}
 	},
