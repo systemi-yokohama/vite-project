@@ -2,22 +2,27 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/typescript-node
 {
 	"name": "vite-project",
-	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 18, 16, 14.
-		// Append -bullseye or -buster to pin to an OS version.
-		// Use -bullseye variants on local on arm64/Apple Silicon.
-		"args": {
-			"VARIANT": "16-bullseye"
-		}
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
+	"remoteEnv": {
+		"EDITOR": "code --wait",
+		"STORYBOOK_DISABLE_TELEMETRY": "1"
 	},
 
-  // set of name-value pairs that sets or overrides environment variables for the container.
-	"containerEnv": {
-		"STORYBOOK_TELEMETRY_DEBUG": "1"
+	// Use a targeted named volume
+	"mounts": [
+		"source=vite-project-dist,target=${containerWorkspaceFolder}/dist,type=volume",
+		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=vite-project-storybook-static,target=${containerWorkspaceFolder}/storybook-static,type=volume"
+	],
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/node:1": {}
 	},
 
-  // Configure tool-specific properties.
+	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
@@ -52,6 +57,7 @@
 			"extensions": [
 				"bradlc.vscode-tailwindcss",
 				"csstools.postcss",
+				"eamodio.gitlens",
 				"EditorConfig.EditorConfig",
 				"esbenp.prettier-vscode",
 				"medo64.render-crlf"
@@ -63,25 +69,8 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": ".devcontainer/postcreate.sh",
+	"postCreateCommand": ".devcontainer/postcreate.sh"
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node",
-	"features": {
-		"git": "latest",
-		"github-cli": "latest"
-	},
-
-	// Change the default source code mount
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
-	"workspaceFolder": "/workspace",
-
-	"mounts": [
-		// Avoiding extension reinstalls on container rebuild
-		"source=vite-project-extensions,target=/home/node/.vscode-server/extensions,type=volume",
-		// Use a targeted named volume
-		"source=vite-project-dist,target=${containerWorkspaceFolder}/dist,type=volume",
-		"source=vite-project-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-		"source=vite-project-storybook-static,target=${containerWorkspaceFolder}/storybook-static,type=volume"
-	]
+	// "remoteUser": "node",
 }

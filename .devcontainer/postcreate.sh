@@ -3,12 +3,18 @@
 
 set -e
 
-git config --global --add safe.directory /workspace
+# set git safe directory
+git config --global --add safe.directory $PWD
 
-npx husky install
+# set ownership
+sudo chown $USER dist node_modules storybook-static
 
-sudo chown node:node dist node_modules storybook-static
+# install global packages
+npm install -g editorconfig npm
 
+# install commitlint
+npm install -g @commitlint/cli @commitlint/config-conventional
+npx -y husky install
+
+# install dependencies
 npm ci
-
-exec "$@"
